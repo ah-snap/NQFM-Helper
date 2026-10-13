@@ -19,11 +19,33 @@ into the spreadsheet.
 ## How metrics are computed
 
 Columns match the spreadsheet: `Completed` (G), `Unplanned` (H), `Story Value` (J),
-`Is Alternate Done` (L), `Credit Already Taken` (M).
+`Is Alternate Done` (L), `Credit Already Taken` (M). Each sum ranges over all tickets
+in the sprint, with the subscript naming the filter applied before summing `J`
+(e.g. $\sum_{G=\text{true}} J$ is the total Story Value of completed tickets).
 
-- **Story Value** = Story Points × MoSCoW modifier (configurable; defaults Must/Should/Could/Would Have = 5/3/2/1).
-- **Standard**: Reliability = Σ J(G=true) / Σ J · Predictability = 1 − Σ J(H=true) / Σ J(G=true) · Quality = Reliability × Predictability · Throughput = Σ J(G=true) · Score = Quality × Throughput / Cost.
-- **Alternate**: Reliability = Σ J(L=true, M=false) / Σ J(M=false) · Predictability = 1 − Σ J(H=true) / Σ J(L=true, M=false) · Throughput = Σ J(L=true) · Quality/Score same shape as standard.
+$$\text{Story Value} = \text{Story Points} \times \text{MoSCoW Modifier}$$
+
+(MoSCoW Modifier is configurable; defaults Must/Should/Could/Would Have = 5/3/2/1.)
+
+**Standard**
+
+$$\text{Reliability} = \frac{\sum_{G=\text{true}} J}{\sum J}$$
+
+$$\text{Predictability} = 1 - \frac{\sum_{H=\text{true}} J}{\sum_{G=\text{true}} J}$$
+
+$$\text{Quality} = \text{Reliability} \times \text{Predictability}$$
+
+$$\text{Throughput} = \sum_{G=\text{true}} J$$
+
+$$\text{Score} = \frac{\text{Quality} \times \text{Throughput}}{\text{Cost}}$$
+
+**Alternate (OvrC)** — same Quality/Score shape as Standard, with:
+
+$$\text{Reliability}_{\text{alt}} = \frac{\sum_{L=\text{true},\ M=\text{false}} J}{\sum_{M=\text{false}} J}$$
+
+$$\text{Predictability}_{\text{alt}} = 1 - \frac{\sum_{H=\text{true}} J}{\sum_{L=\text{true},\ M=\text{false}} J}$$
+
+$$\text{Throughput}_{\text{alt}} = \sum_{L=\text{true}} J$$
 
 ## Known assumptions (please validate against a live payload)
 
