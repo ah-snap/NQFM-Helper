@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>NQFM Helper</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="nqfm-popup">
+    <h1>NQFM Helper</h1>
+
+    <div id="board-info" class="nqfm-board-info"></div>
+
+    <div class="nqfm-field">
+      <label><input type="radio" name="mode" value="sprint" checked /> Single sprint</label>
+      <label><input type="radio" name="mode" value="month" /> Blend by month</label>
+    </div>
+
+    <div class="nqfm-field" id="sprint-field">
+      <label for="sprint-select">Sprint</label>
+      <select id="sprint-select"></select>
+    </div>
+
+    <div class="nqfm-field" id="month-field" style="display:none;">
+      <label for="month-input">Month</label>
+      <input type="month" id="month-input" />
+    </div>
+
+    <div class="nqfm-field">
+      <button id="calculate-btn">Calculate</button>
+      <button id="refresh-sprints-btn" class="nqfm-secondary">Refresh sprint list</button>
+      <button id="copy-sprintlist-btn" class="nqfm-secondary">Copy sprint list (debug)</button>
+    </div>
+
+    <div id="status" class="nqfm-status"></div>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="../lib/constants.js"></script>
+  <script src="../lib/storage.js"></script>
+  <script src="../lib/dateUtils.js"></script>
+  <script src="../lib/metrics.js"></script>
+  <script src="../lib/sprintReportParser.js"></script>
+  <script src="../lib/format.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

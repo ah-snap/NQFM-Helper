@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "NQFM Helper",
+  "version": "0.1.0",
+  "description": "Calculates NQFM sprint quality metrics (Reliability, Predictability, Quality, Throughput, Score) directly from Jira sprint report data.",
+  "permissions": ["storage", "scripting", "tabs"],
+  "host_permissions": ["https://jira.snapone.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "NQFM Helper"
+  },
+  "options_page": "src/options/options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://jira.snapone.com/secure/RapidBoard.jspa*"],
+      "js": [
+        "src/lib/constants.js",
+        "src/lib/storage.js",
+        "src/lib/dateUtils.js",
+        "src/lib/jiraApi.js",
+        "src/lib/sprintReportParser.js",
+        "src/lib/metrics.js",
+        "src/lib/format.js",
+        "src/content/content.js"
+      ],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

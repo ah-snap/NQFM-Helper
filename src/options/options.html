@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>NQFM Helper — Options</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <h1>NQFM Helper — Settings</h1>
+
+  <section>
+    <h2>Cost (team size)</h2>
+    <p class="nqfm-hint">Used as the denominator in the Score calculation.</p>
+    <input type="number" id="cost-input" min="0" step="1" />
+  </section>
+
+  <section>
+    <h2>MoSCoW story value modifiers</h2>
+    <p class="nqfm-hint">Story Value = Story Points × modifier for the ticket's MoSCoW label.</p>
+    <table id="moscow-table">
+      <thead><tr><th>Label</th><th>Modifier</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <button id="add-moscow-row" class="nqfm-secondary">Add row</button>
+  </section>
+
+  <section>
+    <h2>Alternate "Done" statuses</h2>
+    <p class="nqfm-hint">
+      Comma-separated Jira status names that count as complete for the Alternate metrics
+      (e.g. for OvrC's 3-week release cycle).
+    </p>
+    <input type="text" id="alt-done-input" placeholder="Done, Closed, Released" />
+  </section>
+
+  <section>
+    <h2>Is OvrC auto-detection</h2>
+    <p class="nqfm-hint">
+      Tickets whose summary contains this keyword default to "Is OvrC" = true. (Jira's
+      sprint report data doesn't include labels, so label-based detection isn't available yet.)
+    </p>
+    <input type="text" id="ovrc-keyword-input" placeholder="ovrc" />
+  </section>
+
+  <section>
+    <h2>Default board (for the popup)</h2>
+    <p class="nqfm-hint">
+      Only used if the popup hasn't yet seen you visit a sprint report page. Find the
+      rapidView id in your board's URL, e.g. <code>rapidView=670</code>.
+    </p>
+    <input type="text" id="default-rapidview-input" placeholder="670" />
+  </section>
+
+  <section>
+    <h2>Sprint history length</h2>
+    <p class="nqfm-hint">How many recent sprints the popup pulls into its dropdown / month blend.</p>
+    <input type="number" id="sprint-history-input" min="1" step="1" />
+  </section>
+
+  <div class="nqfm-actions">
+    <button id="save-btn">Save</button>
+    <span id="save-status" class="nqfm-status"></span>
+  </div>
+
+  <script src="../lib/constants.js"></script>
+  <script src="../lib/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
